@@ -30,11 +30,14 @@ namespace UltraMusic.Views
         public void RenderProviders(List<MusicProvider> providers) 
         {
             this.providers = providers;
-
+            RenderProviders();
         }
 
         private void RenderProviders()
         {
+            if (providers == null || providers.Count == 0)
+                return;
+
             SideBarSourceList.Initialize();
 
             var group = new SideBarItem("Music Providers");
@@ -53,7 +56,7 @@ namespace UltraMusic.Views
         {
             base.AwakeFromNib();
 
-
+            RenderProviders();
         }
 
         public delegate void ProviderClickedDelegate(MusicProvider provider);

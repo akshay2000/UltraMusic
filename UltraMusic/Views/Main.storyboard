@@ -687,7 +687,6 @@
                     </splitView>
                     <connections>
                         <outlet property="SideBarItem" destination="XTY-wr-bf4" id="2Sn-J9-kWd"/>
-                        <outlet property="SplitView" destination="VGd-Ix-Km7" id="5jV-IC-HMg"/>
                         <outlet property="WebRendererItem" destination="jEK-uq-6OP" id="YFw-dz-vrn"/>
                         <segue destination="o1z-Qi-aon" kind="relationship" relationship="splitItems" id="aHl-cs-Sxo"/>
                         <segue destination="Bla-fN-Zca" kind="relationship" relationship="splitItems" id="7wR-4N-sFC"/>

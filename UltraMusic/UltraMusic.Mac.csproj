@@ -70,6 +70,7 @@
     <Folder Include="Resources\" />
     <Folder Include="Models\" />
     <Folder Include="Views\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -95,6 +96,7 @@
     <Compile Include="Views\WebRendererController.designer.cs">
       <DependentUpon>WebRendererController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Views\Main.storyboard" />

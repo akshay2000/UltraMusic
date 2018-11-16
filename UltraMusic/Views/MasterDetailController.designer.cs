@@ -16,10 +16,7 @@ namespace UltraMusic.Views
 		AppKit.NSSplitViewItem SideBarItem { get; set; }
 
 		[Outlet]
-		AppKit.NSSplitView SplitView { get; set; }
-
-		[Outlet]
-		AppKit.NSSplitViewItem WebRendererItem { get; set; }
+        AppKit.NSSplitViewItem WebRendererItem { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -31,11 +28,6 @@ namespace UltraMusic.Views
 			if (WebRendererItem != null) {
 				WebRendererItem.Dispose ();
 				WebRendererItem = null;
-			}
-
-			if (SplitView != null) {
-				SplitView.Dispose ();
-				SplitView = null;
 			}
 		}
 	}

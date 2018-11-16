@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using AppKit;
 using CoreGraphics;
 using Foundation;
+using UltraMusic.Helpers;
 using UltraMusic.Portable.Models;
+using UltraMusic.Portable.ViewModels;
 using WebKit;
 
 namespace UltraMusic.Views
@@ -15,9 +17,16 @@ namespace UltraMusic.Views
     {
         private SideBarController leftController;
         private WebRendererController rightController;
+        private MainViewModel viewModel;
 
         public MasterDetailController(IntPtr handle) : base(handle)
         {
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            viewModel = ViewModelLocator.MainViewModel;
         }
 
         public override void ViewDidLoad()
@@ -29,16 +38,42 @@ namespace UltraMusic.Views
             rightController = WebRendererItem.ViewController as WebRendererController;
 
             leftController.ProviderClicked += RenderProvider;
+            viewModel.PropertyChanged += ViewModel_PropertyChanged;
+            viewModel.Loaded();
         }
+
+        void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            string propertyName = e.PropertyName;
+            switch (propertyName)
+            {
+                case nameof(viewModel.MusicProviders):
+                    ProvidersChanged();
+                    break;
+            }
+        }
+
+        private void ProvidersChanged() 
+        {
+            leftController.RenderProviders(viewModel.MusicProviders);
+        }
+
 
         private void RenderProvider(MusicProvider provider)
         {
-            if (rightController.View.Subviews.Length > 0)
+            var rightView = rightController.View;
+
+            if (rightView.Subviews.Length > 0)
             {
-                rightController.View.Subviews[0].RemoveFromSuperview();
+                rightView.Subviews[0].RemoveFromSuperview();
             }
             var webView = GetView(provider, rightController.View.Frame);
-            rightController.View.AddSubview(webView);
+            rightView.AddSubview(webView);
+
+            webView.TopAnchor.ConstraintEqualToAnchor(rightView.TopAnchor).Active = true;
+            webView.BottomAnchor.ConstraintEqualToAnchor(rightView.BottomAnchor).Active = true;
+            webView.LeftAnchor.ConstraintEqualToAnchor(rightView.LeftAnchor).Active = true;
+            webView.RightAnchor.ConstraintEqualToAnchor(rightView.RightAnchor).Active = true;
         }
 
         private Dictionary<string, WKWebView> webViews;
@@ -56,8 +91,10 @@ namespace UltraMusic.Views
                     "(KHTML, like Gecko) Version/12.0 Safari/605.1.15",
                     AutoresizingMask = NSViewResizingMask.HeightSizable | NSViewResizingMask.WidthSizable
                 };
+                webView.TranslatesAutoresizingMaskIntoConstraints = false;
 
                 var req = new NSUrlRequest(new NSUrl(provider.Url));
+
                 webView.LoadRequest(req);
                 webViews[provider.Id] = webView;
             }

@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace UltraMusic.Portable.ViewModels
 {
-    public class MainViewModel : BindableBase
+    public class MainViewModel : ViewModelBase
     {
         private List<MusicProvider> musicProviders;
         public List<MusicProvider> MusicProviders
@@ -24,7 +24,7 @@ namespace UltraMusic.Portable.ViewModels
         public async void LoadMusicProvidersAsync()
         {
             var jsonString = await GetProvidersSpecAsync();
-            musicProviders = JsonConvert.DeserializeObject<List<MusicProvider>>(jsonString);
+            MusicProviders = JsonConvert.DeserializeObject<List<MusicProvider>>(jsonString);
         }
 
         public virtual async Task<string> GetProvidersSpecAsync() {
@@ -35,5 +35,9 @@ namespace UltraMusic.Portable.ViewModels
             return ret;
         }
 
+        public override void Loaded()
+        {
+            LoadMusicProvidersAsync();
+        }
     }
 }
