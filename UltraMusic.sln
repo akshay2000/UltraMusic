@@ -1,7 +1,9 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltraMusic", "UltraMusic\UltraMusic.csproj", "{6D3D6A1A-12F3-4AC9-803A-709BB432CC58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltraMusic.Mac", "UltraMusic\UltraMusic.Mac.csproj", "{6D3D6A1A-12F3-4AC9-803A-709BB432CC58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltraMusic.Portable", "UltraMusic.Portable\UltraMusic.Portable.csproj", "{A1268EB2-2198-454D-ACE2-D727B91F593A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,5 +15,9 @@ Global
 		{6D3D6A1A-12F3-4AC9-803A-709BB432CC58}.Debug|x86.Build.0 = Debug|x86
 		{6D3D6A1A-12F3-4AC9-803A-709BB432CC58}.Release|x86.ActiveCfg = Release|x86
 		{6D3D6A1A-12F3-4AC9-803A-709BB432CC58}.Release|x86.Build.0 = Release|x86
+		{A1268EB2-2198-454D-ACE2-D727B91F593A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A1268EB2-2198-454D-ACE2-D727B91F593A}.Debug|x86.Build.0 = Debug|Any CPU
+		{A1268EB2-2198-454D-ACE2-D727B91F593A}.Release|x86.ActiveCfg = Release|Any CPU
+		{A1268EB2-2198-454D-ACE2-D727B91F593A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

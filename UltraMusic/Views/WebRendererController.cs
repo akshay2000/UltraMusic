@@ -6,7 +6,7 @@ using Foundation;
 using AppKit;
 using WebKit;
 
-namespace UltraMusic
+namespace UltraMusic.Views
 {
 	public partial class WebRendererController : NSViewController
 	{

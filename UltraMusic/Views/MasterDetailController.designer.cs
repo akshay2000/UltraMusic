@@ -7,13 +7,16 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace UltraMusic
+namespace UltraMusic.Views
 {
 	[Register ("MasterDetailController")]
 	partial class MasterDetailController
 	{
 		[Outlet]
 		AppKit.NSSplitViewItem SideBarItem { get; set; }
+
+		[Outlet]
+		AppKit.NSSplitView SplitView { get; set; }
 
 		[Outlet]
 		AppKit.NSSplitViewItem WebRendererItem { get; set; }
@@ -28,6 +31,11 @@ namespace UltraMusic
 			if (WebRendererItem != null) {
 				WebRendererItem.Dispose ();
 				WebRendererItem = null;
+			}
+
+			if (SplitView != null) {
+				SplitView.Dispose ();
+				SplitView = null;
 			}
 		}
 	}

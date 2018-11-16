@@ -672,6 +672,7 @@
         <!--Master Detail Controller-->
         <scene sceneID="165-4m-ME5">
             <objects>
+                <customObject id="wde-ii-rvQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <splitViewController id="hdh-Go-rHd" customClass="MasterDetailController" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="XTY-wr-bf4"/>
@@ -685,14 +686,13 @@
                         </connections>
                     </splitView>
                     <connections>
-                        <outlet property="SideBarItem" destination="XTY-wr-bf4" id="kgR-FF-oId"/>
-                        <outlet property="WebRendererItem" destination="jEK-uq-6OP" id="ldx-6N-oZt"/>
-                        <outlet property="splitView" destination="VGd-Ix-Km7" id="pXu-b2-4m0"/>
+                        <outlet property="SideBarItem" destination="XTY-wr-bf4" id="2Sn-J9-kWd"/>
+                        <outlet property="SplitView" destination="VGd-Ix-Km7" id="5jV-IC-HMg"/>
+                        <outlet property="WebRendererItem" destination="jEK-uq-6OP" id="YFw-dz-vrn"/>
                         <segue destination="o1z-Qi-aon" kind="relationship" relationship="splitItems" id="aHl-cs-Sxo"/>
                         <segue destination="Bla-fN-Zca" kind="relationship" relationship="splitItems" id="7wR-4N-sFC"/>
                     </connections>
                 </splitViewController>
-                <customObject id="wde-ii-rvQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="76" y="714"/>
         </scene>
@@ -786,7 +786,7 @@
                         </scroller>
                     </scrollView>
                     <connections>
-                        <outlet property="SideBarSourceList" destination="8uv-Mq-q9e" id="9Kq-cr-tXY"/>
+                        <outlet property="SideBarSourceList" destination="8uv-Mq-q9e" id="klQ-YB-MIn"/>
                     </connections>
                 </viewController>
                 <customObject id="fLB-p2-fvw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

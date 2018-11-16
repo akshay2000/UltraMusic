@@ -7,7 +7,7 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace UltraMusic
+namespace UltraMusic.Views
 {
 	[Register ("WebRendererController")]
 	partial class WebRendererController

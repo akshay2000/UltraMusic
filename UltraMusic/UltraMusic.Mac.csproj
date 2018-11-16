@@ -48,6 +48,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.Mac" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
@@ -66,33 +69,41 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="MasterDetailController.cs" />
-    <Compile Include="MasterDetailController.designer.cs">
-      <DependentUpon>MasterDetailController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SideBarController.cs" />
-    <Compile Include="SideBarController.designer.cs">
-      <DependentUpon>SideBarController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WebRendererController.cs" />
-    <Compile Include="WebRendererController.designer.cs">
-      <DependentUpon>WebRendererController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\SideBarItem.cs" />
     <Compile Include="Models\SideBarDataSource.cs" />
     <Compile Include="Models\SourceListView.cs" />
     <Compile Include="Models\SideBarDelegate.cs" />
+    <Compile Include="Views\MasterDetailController.cs" />
+    <Compile Include="Views\MasterDetailController.designer.cs">
+      <DependentUpon>MasterDetailController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SideBarController.cs" />
+    <Compile Include="Views\SideBarController.designer.cs">
+      <DependentUpon>SideBarController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebRendererController.cs" />
+    <Compile Include="Views\WebRendererController.designer.cs">
+      <DependentUpon>WebRendererController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="Views\Main.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UltraMusic.Portable\UltraMusic.Portable.csproj">
+      <Project>{A1268EB2-2198-454D-ACE2-D727B91F593A}</Project>
+      <Name>UltraMusic.Portable</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
 </Project>
