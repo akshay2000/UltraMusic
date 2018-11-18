@@ -71,6 +71,11 @@
     <Folder Include="Models\" />
     <Folder Include="Views\" />
     <Folder Include="Helpers\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Resources\ProvidersSpec\" />
+    <Folder Include="Resources\ProvidersSpec\AmazonPrime\" />
+    <Folder Include="Resources\ProvidersSpec\GoogleMusic\" />
+    <Folder Include="Resources\ProvidersSpec\Saavn\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -97,6 +102,8 @@
       <DependentUpon>WebRendererController.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ViewModelLocator.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\WebViewWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Views\Main.storyboard" />
@@ -106,6 +113,26 @@
       <Project>{A1268EB2-2198-454D-ACE2-D727B91F593A}</Project>
       <Name>UltraMusic.Portable</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ProvidersSpec\Spec.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ProvidersSpec\AmazonPrime\Play.js" />
+    <BundleResource Include="Resources\ProvidersSpec\AmazonPrime\Pause.js" />
+    <BundleResource Include="Resources\ProvidersSpec\AmazonPrime\Next.js" />
+    <BundleResource Include="Resources\ProvidersSpec\AmazonPrime\PlayerState.js" />
+    <BundleResource Include="Resources\ProvidersSpec\GoogleMusic\Next.js" />
+    <BundleResource Include="Resources\ProvidersSpec\GoogleMusic\Pause.js" />
+    <BundleResource Include="Resources\ProvidersSpec\GoogleMusic\Play.js" />
+    <BundleResource Include="Resources\ProvidersSpec\GoogleMusic\PlayerState.js" />
+    <BundleResource Include="Resources\ProvidersSpec\Saavn\Next.js" />
+    <BundleResource Include="Resources\ProvidersSpec\Saavn\Pause.js" />
+    <BundleResource Include="Resources\ProvidersSpec\Saavn\Play.js" />
+    <BundleResource Include="Resources\ProvidersSpec\Saavn\PlayerState.js" />
+    <BundleResource Include="Resources\ProvidersSpec\AmazonPrime\Previous.js" />
+    <BundleResource Include="Resources\ProvidersSpec\GoogleMusic\Previous.js" />
+    <BundleResource Include="Resources\ProvidersSpec\Saavn\Previous.js" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
 </Project>

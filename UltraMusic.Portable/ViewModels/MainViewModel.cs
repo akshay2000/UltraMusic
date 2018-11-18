@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using UltraMusic.Portable.Models;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace UltraMusic.Portable.ViewModels
 {
@@ -23,21 +24,38 @@ namespace UltraMusic.Portable.ViewModels
 
         public async void LoadMusicProvidersAsync()
         {
-            var jsonString = await GetProvidersSpecAsync();
-            MusicProviders = JsonConvert.DeserializeObject<List<MusicProvider>>(jsonString);
+            MusicProviders = await GetProvidersAsync();
         }
 
-        public virtual async Task<string> GetProvidersSpecAsync() {
-            const string ret = "[{\"Id\":\"Saavn\",\"Name\":\"Saavn\",\"Url\":\"https://saavn.com\",\"PauseJs\":\"\",\"PlayJs\":\"\",\"PreviousJs\":\"\",\"NextJs\":\"\",\"SearchUrl\":\"https://saavn.com/search/{0}\"}," +
-                "{\"Id\":\"AmazonPrime\",\"Name\":\"Amazon Prime\",\"Url\":\"https://music.amazon.in\",\"PauseJs\":\"\",\"PlayJs\":\"\",\"PreviousJs\":\"\",\"NextJs\":\"\",\"SearchUrl\":\"https://music.amazon.in/search/{0}\"}," +
-                "{\"Id\":\"GoogleMusic\",\"Name\":\"Google Music\",\"Url\":\"https://music.google.com\",\"PauseJs\":\"\",\"PlayJs\":\"\",\"PreviousJs\":\"\",\"NextJs\":\"\",\"SearchUrl\":\"https://play.google.com/music/listen?u=0#/sr/{0}\"}]";
-            await Task.CompletedTask;
-            return ret;
+        private async Task<List<MusicProvider>> GetProvidersAsync()
+        {
+            string specDirectory = GetProvidersSpecDirectory();
+            string specJson = await GetText(Path.Combine(specDirectory, "Spec.json"));
+            var providers = JsonConvert.DeserializeObject<List<MusicProvider>>(specJson);
+            foreach (var provider in providers)
+            {
+                string id = provider.Id;
+                provider.PlayJs = await GetText(specDirectory, id, "Play.js");
+                provider.PauseJs = await GetText(specDirectory, id, "Pause.js");
+                provider.NextJs = await GetText(specDirectory, id, "Next.js");
+                provider.PreviousJs = await GetText(specDirectory, id, "Previous.js");
+                provider.PlayerStateJs = await GetText(specDirectory, id, "PlayerState.js");
+            }
+            return providers;
         }
+
+        public virtual string GetProvidersSpecDirectory() => throw new NotImplementedException();
 
         public override void Loaded()
         {
             LoadMusicProvidersAsync();
+        }
+
+        private async Task<string> GetText(params string[] fragments)
+        {
+            string filePath = Path.Combine(fragments);
+            using (StreamReader reader = File.OpenText(filePath))
+                return await reader.ReadToEndAsync();
         }
     }
 }

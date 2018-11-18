@@ -10,5 +10,6 @@
         public string PreviousJs { get; set; }
         public string NextJs { get; set; }
         public string SearchUrl { get; set; }
+        public string PlayerStateJs { get; set; }
     }
 }

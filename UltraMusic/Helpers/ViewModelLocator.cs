@@ -1,5 +1,6 @@
 ﻿using System;
-using UltraMusic.Portable.ViewModels;
+using Foundation;
+using UltraMusic.ViewModels;
 
 namespace UltraMusic.Helpers
 {
@@ -7,7 +8,6 @@ namespace UltraMusic.Helpers
     {
         public ViewModelLocator()
         {
-
         }
 
         private static MainViewModel mainViewModel;

@@ -2,22 +2,23 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using AppKit;
 using CoreGraphics;
 using Foundation;
 using UltraMusic.Helpers;
 using UltraMusic.Portable.Models;
 using UltraMusic.Portable.ViewModels;
+using UltraMusic.ViewModels;
 using WebKit;
 
 namespace UltraMusic.Views
 {
-    public partial class MasterDetailController :
-    NSSplitViewController
+    public partial class MasterDetailController : NSSplitViewController
     {
         private SideBarController leftController;
         private WebRendererController rightController;
-        private MainViewModel viewModel;
+        private ViewModels.MainViewModel viewModel;
 
         public MasterDetailController(IntPtr handle) : base(handle)
         {
@@ -40,6 +41,9 @@ namespace UltraMusic.Views
             leftController.ProviderClicked += RenderProvider;
             viewModel.PropertyChanged += ViewModel_PropertyChanged;
             viewModel.Loaded();
+
+            var res = NSBundle.MainBundle.ResourcePath;
+
         }
 
         void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -58,7 +62,6 @@ namespace UltraMusic.Views
             leftController.RenderProviders(viewModel.MusicProviders);
         }
 
-
         private void RenderProvider(MusicProvider provider)
         {
             var rightView = rightController.View;
@@ -67,7 +70,7 @@ namespace UltraMusic.Views
             {
                 rightView.Subviews[0].RemoveFromSuperview();
             }
-            var webView = GetView(provider, rightController.View.Frame);
+            WKWebView webView = GetWebViewWrapper(provider, rightController.View.Frame).WebView ;
             rightView.AddSubview(webView);
 
             webView.TopAnchor.ConstraintEqualToAnchor(rightView.TopAnchor).Active = true;
@@ -76,13 +79,12 @@ namespace UltraMusic.Views
             webView.RightAnchor.ConstraintEqualToAnchor(rightView.RightAnchor).Active = true;
         }
 
-        private Dictionary<string, WKWebView> webViews;
-
-        private WKWebView GetView(MusicProvider provider, CGRect rect)
+        private Dictionary<string, WebViewWrapper> webViewWrappers;
+        private WebViewWrapper GetWebViewWrapper(MusicProvider provider, CGRect rect)
         {
-            if (webViews == null)
-                webViews = new Dictionary<string, WKWebView>();
-            if (!webViews.ContainsKey(provider.Id))
+            if (webViewWrappers == null)
+                webViewWrappers = new Dictionary<string, WebViewWrapper>();
+            if (!webViewWrappers.ContainsKey(provider.Id))
             {
                 var webView = new WKWebView(rect, new WKWebViewConfiguration())
                 {
@@ -96,9 +98,9 @@ namespace UltraMusic.Views
                 var req = new NSUrlRequest(new NSUrl(provider.Url));
 
                 webView.LoadRequest(req);
-                webViews[provider.Id] = webView;
+                webViewWrappers[provider.Id] = new WebViewWrapper(webView, provider);
             }
-            return webViews[provider.Id];
+            return webViewWrappers[provider.Id];
         }
     }
 }
