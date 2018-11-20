@@ -1,1 +1,1 @@
-﻿
+﻿document.getElementById("play").click()

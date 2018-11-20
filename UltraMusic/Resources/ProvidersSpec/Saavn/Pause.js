@@ -1,1 +1,1 @@
-﻿
+﻿document.getElementById("pause").click()

@@ -1,1 +1,1 @@
-﻿
+﻿document.getElementById("fwd").click()

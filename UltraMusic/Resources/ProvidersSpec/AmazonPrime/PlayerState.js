@@ -2,11 +2,11 @@
     button = document.getElementsByClassName("playbackControls")[0].children[1]
     if (button.classList.contains("disabled")) {
         return "idle";
-} else {
+    } else {
         if (getComputedStyle(button, ":before").content == "\ue60a") {
             return "paused";
-       } else {
-          return "playing";
+        } else {
+            return "playing";
         }
     }
 }
