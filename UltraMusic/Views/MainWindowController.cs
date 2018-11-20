@@ -32,6 +32,20 @@ namespace UltraMusic.Views
             switch (e.PropertyName)
             {
                 case nameof(ViewModels.MainViewModel.PlayerState):
+                    PlayerStateChanged();
+                    break;
+            }
+        }
+
+        private void PlayerStateChanged()
+        {
+            switch (ViewModelLocator.MainViewModel.PlayerState)
+            {
+                case Portable.ViewModels.PlayerState.Idle:
+                    PlayPauseButton.Enabled = false;
+                    break;
+                default:
+                    PlayPauseButton.Enabled = true;
                     break;
             }
         }
