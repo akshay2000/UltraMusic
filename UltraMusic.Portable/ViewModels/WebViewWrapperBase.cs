@@ -15,10 +15,14 @@ namespace UltraMusic.Portable.ViewModels
     public abstract class WebViewWrapperBase
     {
         private readonly MusicProvider musicProvider;
-        protected WebViewWrapperBase(MusicProvider musicProvider)
+        public object WebView { get; }
+
+        protected WebViewWrapperBase(object webView, MusicProvider musicProvider)
         {
+            WebView = webView;
             this.musicProvider = musicProvider;
         }
+
 
         public abstract Task<object> EvaluateJavaScript(string script);
 
@@ -57,8 +61,17 @@ namespace UltraMusic.Portable.ViewModels
 
         public virtual async Task<PlayerState> GetPlayerState()
         {
-            var t = await SafeEvaluateJavaScript(musicProvider.PlayerStateJs);
-            return PlayerState.Idle;
+            var result = await SafeEvaluateJavaScript(musicProvider.PlayerStateJs);
+            string stateString = result.ToString();
+            Enum.TryParse(stateString, true, out PlayerState state);
+            return state;
+        }
+
+        public event EventHandler PlayerStateChanged;
+
+        private void RaisePlayerStateChanged()
+        {
+            PlayerStateChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

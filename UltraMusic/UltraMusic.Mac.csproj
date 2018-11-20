@@ -104,6 +104,11 @@
     <Compile Include="Helpers\ViewModelLocator.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\WebViewWrapper.cs" />
+    <Compile Include="Views\MainWindowController.cs" />
+    <Compile Include="Views\MainWindowController.designer.cs">
+      <DependentUpon>MainWindowController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Container.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Views\Main.storyboard" />
@@ -116,6 +121,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\ProvidersSpec\Spec.json" />
+    <Content Include="Resources\ProvidersSpec\AmazonPrime\Events.js" />
+    <Content Include="Resources\ProvidersSpec\GoogleMusic\Events.js" />
+    <Content Include="Resources\ProvidersSpec\Saavn\Events.js" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ProvidersSpec\AmazonPrime\Play.js" />

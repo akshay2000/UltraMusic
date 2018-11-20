@@ -651,17 +651,84 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="MainWindowController" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <toolbar key="toolbar" implicitIdentifier="BA4D7A49-245A-4194-9CF7-176BA0D4D7CD" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="w36-Hn-EUm">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="TQt-JL-7Ks"/>
+                                <toolbarItem implicitItemIdentifier="67AF994E-D1CD-4DFE-893C-2D9438AA26AE" label="Play Pause Button" paletteLabel="Play Pause Button" image="NSTouchBarPlayPauseTemplate" sizingBehavior="auto" id="mU2-ts-T55">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="lNm-jR-gaI">
+                                        <rect key="frame" x="27" y="14" width="48" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSTouchBarPlayPauseTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="9Cr-vQ-h7H">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="systemBold" size="12"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="PlayPauseButtonClicked:" target="B8D-0N-5wS" id="wLq-Cx-R4f"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="916F9275-8A91-4F6E-9271-C08DAD0E6909" label="Next Button" paletteLabel="Next Button" image="NSTouchBarFastForwardTemplate" sizingBehavior="auto" id="9zT-HP-rp7">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="JhJ-Ql-OsO">
+                                        <rect key="frame" x="11" y="14" width="48" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSTouchBarFastForwardTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="r8x-Ch-RfZ">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="systemBold" size="12"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="NextButtonClicked:" target="B8D-0N-5wS" id="Faa-Dk-do0"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="7189CD67-6032-420E-9398-8BE526C9E234" label="Previous Button" paletteLabel="Previous Button" image="NSTouchBarRewindTemplate" sizingBehavior="auto" id="0Tr-dl-GUu">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="z9q-ff-HMS">
+                                        <rect key="frame" x="22" y="14" width="48" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSTouchBarRewindTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="f2e-Td-Hb9">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="systemBold" size="12"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="PreviousButtonClicked:" target="B8D-0N-5wS" id="mJG-9O-bkU"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="D0520692-15CF-445B-9439-A9C7C837C289" label="Search Bar" paletteLabel="Search Bar" sizingBehavior="auto" id="asJ-7Q-ifk">
+                                    <nil key="toolTip"/>
+                                    <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="nmR-fW-jhS">
+                                        <rect key="frame" x="0.0" y="14" width="96" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="zY9-Dq-SCm">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                    </searchField>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="0Tr-dl-GUu"/>
+                                <toolbarItem reference="mU2-ts-T55"/>
+                                <toolbarItem reference="9zT-HP-rp7"/>
+                                <toolbarItem reference="TQt-JL-7Ks"/>
+                                <toolbarItem reference="asJ-7Q-ifk"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="oJj-ug-zGr"/>
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="PlayPauseButton" destination="lNm-jR-gaI" id="3Bu-gZ-wKz"/>
                         <segue destination="hdh-Go-rHd" kind="relationship" relationship="window.shadowedContentViewController" id="8BX-f0-Ueg"/>
                     </connections>
                 </windowController>
@@ -834,5 +901,8 @@
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSTouchBarFastForwardTemplate" width="22" height="30"/>
+        <image name="NSTouchBarPlayPauseTemplate" width="23" height="30"/>
+        <image name="NSTouchBarRewindTemplate" width="22" height="30"/>
     </resources>
 </document>

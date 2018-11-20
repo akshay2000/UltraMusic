@@ -14,7 +14,7 @@ using WebKit;
 
 namespace UltraMusic.Views
 {
-    public partial class MasterDetailController : NSSplitViewController
+    public partial class MasterDetailController : NSSplitViewController, IWKScriptMessageHandler
     {
         private SideBarController leftController;
         private WebRendererController rightController;
@@ -33,6 +33,8 @@ namespace UltraMusic.Views
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            Container.WKScriptMessageHandler = this;
 
             var children = ChildViewControllers;
             leftController = SideBarItem.ViewController as SideBarController;
@@ -54,6 +56,18 @@ namespace UltraMusic.Views
                 case nameof(viewModel.MusicProviders):
                     ProvidersChanged();
                     break;
+                case nameof(viewModel.PlayerState):
+                    PlayerStateChanged();
+                    break;
+            }
+        }
+
+        private void PlayerStateChanged()
+        {
+            switch (viewModel.PlayerState)
+            {
+                case PlayerState.Idle:
+                    break;
             }
         }
 
@@ -70,7 +84,7 @@ namespace UltraMusic.Views
             {
                 rightView.Subviews[0].RemoveFromSuperview();
             }
-            WKWebView webView = GetWebViewWrapper(provider, rightController.View.Frame).WebView ;
+            WKWebView webView = (WKWebView)viewModel.GetWebViewWrapper(provider).WebView ;
             rightView.AddSubview(webView);
 
             webView.TopAnchor.ConstraintEqualToAnchor(rightView.TopAnchor).Active = true;
@@ -79,28 +93,10 @@ namespace UltraMusic.Views
             webView.RightAnchor.ConstraintEqualToAnchor(rightView.RightAnchor).Active = true;
         }
 
-        private Dictionary<string, WebViewWrapper> webViewWrappers;
-        private WebViewWrapper GetWebViewWrapper(MusicProvider provider, CGRect rect)
+        public async void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
         {
-            if (webViewWrappers == null)
-                webViewWrappers = new Dictionary<string, WebViewWrapper>();
-            if (!webViewWrappers.ContainsKey(provider.Id))
-            {
-                var webView = new WKWebView(rect, new WKWebViewConfiguration())
-                {
-                    CustomUserAgent = "Mozilla/5.0 " +
-                    "(Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 " +
-                    "(KHTML, like Gecko) Version/12.0 Safari/605.1.15",
-                    AutoresizingMask = NSViewResizingMask.HeightSizable | NSViewResizingMask.WidthSizable
-                };
-                webView.TranslatesAutoresizingMaskIntoConstraints = false;
-
-                var req = new NSUrlRequest(new NSUrl(provider.Url));
-
-                webView.LoadRequest(req);
-                webViewWrappers[provider.Id] = new WebViewWrapper(webView, provider);
-            }
-            return webViewWrappers[provider.Id];
+            string providerId = message.Body.ToString();
+            await viewModel.PlaybackStateChanged(providerId);
         }
     }
 }
