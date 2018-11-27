@@ -8,7 +8,7 @@ using System.IO;
 
 namespace UltraMusic.Portable.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public abstract class MainViewModel : ViewModelBase
     {
         private readonly Func<MusicProvider, WebViewWrapperBase> wrapperFactory;
 
@@ -118,7 +118,7 @@ namespace UltraMusic.Portable.ViewModels
             return providers;
         }
 
-        public virtual string GetProvidersSpecDirectory() => throw new NotImplementedException();
+        public abstract string GetProvidersSpecDirectory();
 
         public override void Loaded()
         {
