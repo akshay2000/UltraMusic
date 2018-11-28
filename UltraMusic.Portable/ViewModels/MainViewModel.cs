@@ -19,6 +19,14 @@ namespace UltraMusic.Portable.ViewModels
 
         private WebViewWrapperBase nowPlayingViewWrapper;
 
+        public async Task TogglePlayPause()
+        {
+            if (PlayerState == PlayerState.Paused)
+                await Play();
+            else if (PlayerState == PlayerState.Playing)
+                await Pause();
+        }
+
         public async Task Pause()
         {
             if (nowPlayingViewWrapper != null)
@@ -65,12 +73,22 @@ namespace UltraMusic.Portable.ViewModels
                 case PlayerState.Playing:
                     if (nowPlayingViewWrapper != wrapper)
                     {
+                        //background player started playing
+                        //pause current player
                         await Pause();
+                        //bring new one to foreground
                         nowPlayingViewWrapper = wrapper;
+                    }
+                    PlayerState = state;
+                    break;
+                case PlayerState.Paused:
+                case PlayerState.Idle:
+                    if (nowPlayingViewWrapper == wrapper)
+                    {
+                        PlayerState = state;
                     }
                     break;
             }
-            PlayerState = state;
         }
 
 

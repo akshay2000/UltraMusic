@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using UltraMusic.Portable.Models;
 using UltraMusic.Portable.ViewModels;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace UltraMusic.UWP.ViewModels
@@ -12,29 +14,39 @@ namespace UltraMusic.UWP.ViewModels
     internal class WebViewWrapper : WebViewWrapperBase
     {
         private WebView CastedWebView { get { return WebView as WebView; } }
+        private DispatcherTimer timer;
 
         public WebViewWrapper(object webView, MusicProvider musicProvider) : base(webView, musicProvider)
         {
             CastedWebView.ScriptNotify += CastedWebView_ScriptNotify;
             CastedWebView.NavigationCompleted += CastedWebView_NavigationCompleted;
-            CastedWebView.DOMContentLoaded += CastedWebView_DOMContentLoaded;
-            CastedWebView.ContentLoading += CastedWebView_ContentLoading;
+            if (musicProvider.Id != "AmazonPrime") return;
+
+            timer = new DispatcherTimer();
+            timer.Tick += Timer_Tick;
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Start();
         }
 
-        private void CastedWebView_ContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
+        private async void Timer_Tick(object sender, object e)
         {
-            //throw new NotImplementedException();
-        }
-
-        private void CastedWebView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
-        {
-            
+            string js = "function tot() {if (document.isObservingPlaybackState) {return 'true';} else {return 'false';}} tot();";
+            string result = await CastedWebView.InvokeScriptAsync("eval", new string[] { js });
+            if (result == "true")
+            {
+                timer.Stop();
+            }
+            else
+            {
+                await CastedWebView.InvokeScriptAsync("eval", new string[] { musicProvider.EventsJs });
+                await CastedWebView.InvokeScriptAsync("eval", new string[] { "addObservers();" });
+            }
         }
 
         private async void CastedWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
-            var r= await sender.InvokeScriptAsync("eval", new string[] { musicProvider.EventsJs });
-            var r1 = await sender.InvokeScriptAsync("eval", new string[] { "addObservers();" });
+            await sender.InvokeScriptAsync("eval", new string[] { musicProvider.EventsJs });
+            await sender.InvokeScriptAsync("eval", new string[] { "addObservers();" });
         }
 
         private void CastedWebView_ScriptNotify(object sender, NotifyEventArgs e)

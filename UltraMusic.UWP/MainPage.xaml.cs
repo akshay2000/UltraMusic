@@ -69,7 +69,7 @@ namespace UltraMusic.UWP
 
         private async void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            await VM.Pause();
+            await VM.TogglePlayPause();
         }
     }
 }
