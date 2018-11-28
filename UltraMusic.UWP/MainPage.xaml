@@ -9,6 +9,10 @@
     xmlns:vm="using:UltraMusic.UWP.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <x:Double x:Key="PlaybackButtonDimension">50</x:Double>
+    </Page.Resources>
    
     <Grid>
         <Grid.RowDefinitions>
@@ -25,10 +29,27 @@
         </NavigationView>
 
         <Grid Grid.Row="1" Background="{ThemeResource SystemAccentColor}">
-            <StackPanel Orientation="Horizontal">
-                <AppBarButton Icon="Previous"/>
-                <AppBarButton x:Name="PlayButton" Click="PlayButton_Click" Icon="Play"/>
-                <AppBarButton Icon="Next"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" RequestedTheme="Dark">
+                <Button Style="{StaticResource ButtonRevealStyle}" Margin="4" Width="{StaticResource PlaybackButtonDimension}" Height="{StaticResource PlaybackButtonDimension}">
+                    <Button.Content> 
+                        <SymbolIcon Symbol="Previous"/>
+                    </Button.Content>
+                </Button>
+                <Button
+                    x:Name="PlayPauseButton"
+                    Click="PlayButton_Click"
+                    Width="{StaticResource PlaybackButtonDimension}"
+                    Height="{StaticResource PlaybackButtonDimension}"
+                    Style="{StaticResource ButtonRevealStyle}"
+                    Margin="4"
+                    IsEnabled="{Binding PlayerState, Converter={StaticResource StringToBoolConverter}, ConverterParameter=Playing|Paused}"
+                    Content="{Binding PlayerState, Converter={StaticResource PlayerStateToSymbolConverter}}">
+                </Button>
+                <Button Style="{StaticResource ButtonRevealStyle}" Margin="4" Width="{StaticResource PlaybackButtonDimension}" Height="{StaticResource PlaybackButtonDimension}">
+                    <Button.Content>
+                        <SymbolIcon Symbol="Next"/>
+                    </Button.Content>
+                </Button>
             </StackPanel>
         </Grid>
     </Grid>

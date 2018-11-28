@@ -2,6 +2,11 @@
     x:Class="UltraMusic.UWP.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:UltraMusic.UWP">
+    xmlns:local="using:UltraMusic.UWP"
+    xmlns:converters="using:UltraMusic.UWP.Converters">
+    <Application.Resources>
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
+        <converters:PlaybackStateToSymbolConverter x:Key="PlayerStateToSymbolConverter"/>
+    </Application.Resources>
 
 </Application>
