@@ -59,9 +59,17 @@ namespace UltraMusic.UWP
 
         private void MainNavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
+            if (args.IsSettingsSelected)
+                return;
+
             string providerId = ((NavigationViewItem)args.SelectedItem).Tag.ToString();
             var wrapper = VM.GetWebViewWrapper(VM.MusicProviders.Find(p => p.Id == providerId));
             sender.Content = wrapper.WebView;
+        }
+
+        private async void PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            await VM.Pause();
         }
     }
 }

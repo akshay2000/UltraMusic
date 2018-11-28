@@ -14,7 +14,7 @@ namespace UltraMusic.Portable.ViewModels
 
     public abstract class WebViewWrapperBase
     {
-        private readonly MusicProvider musicProvider;
+        protected readonly MusicProvider musicProvider;
         public object WebView { get; }
 
         protected WebViewWrapperBase(object webView, MusicProvider musicProvider)
@@ -69,7 +69,7 @@ namespace UltraMusic.Portable.ViewModels
 
         public event EventHandler PlayerStateChanged;
 
-        private void RaisePlayerStateChanged()
+        protected void RaisePlayerStateChanged()
         {
             PlayerStateChanged?.Invoke(this, EventArgs.Empty);
         }

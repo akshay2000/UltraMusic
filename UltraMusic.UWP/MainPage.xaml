@@ -11,6 +11,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="90"/>
+        </Grid.RowDefinitions>
         <NavigationView 
             x:Name="MainNavigationView" 
             SelectionChanged="MainNavigationView_SelectionChanged"
@@ -19,5 +23,13 @@
                 <NavigationViewItem Icon="Play" />
             </NavigationView.MenuItems>
         </NavigationView>
+
+        <Grid Grid.Row="1" Background="{ThemeResource SystemAccentColor}">
+            <StackPanel Orientation="Horizontal">
+                <AppBarButton Icon="Previous"/>
+                <AppBarButton x:Name="PlayButton" Click="PlayButton_Click" Icon="Play"/>
+                <AppBarButton Icon="Next"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

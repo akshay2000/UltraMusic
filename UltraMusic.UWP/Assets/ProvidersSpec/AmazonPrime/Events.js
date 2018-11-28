@@ -9,7 +9,7 @@ function observePlaybackState() {
     var observerConfig = { childList: true, subtree: true };
 
     var playbackStateChanged = function (mutations, observer) {
-        window.webkit.messageHandlers.playbackState.postMessage("AmazonPrime");
+        console.log("AmazonPrime");
     };
     var playbackStateObserver = new MutationObserver(playbackStateChanged);
     playbackStateObserver.observe(targetNode, observerConfig);

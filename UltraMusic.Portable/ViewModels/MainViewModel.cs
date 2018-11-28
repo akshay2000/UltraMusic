@@ -26,6 +26,7 @@ namespace UltraMusic.Portable.ViewModels
                 await nowPlayingViewWrapper.Pause();
             }
         }
+
         public async Task Play() => await nowPlayingViewWrapper?.Play();
         public async Task Next() => await nowPlayingViewWrapper?.Next();
         public async Task Previous() => await nowPlayingViewWrapper?.Previous();
@@ -47,6 +48,17 @@ namespace UltraMusic.Portable.ViewModels
         public async Task PlaybackStateChanged(string providerId)
         {
             var wrapper = GetWebViewWrapper(MusicProviders.Find(m => m.Id == providerId));
+            await HandlePlaybackStateCanged(wrapper);
+        }
+
+        private async void Wrapper_PlayerStateChanged(object sender, EventArgs e)
+        {
+            WebViewWrapperBase wrapper = (WebViewWrapperBase)sender;
+            await HandlePlaybackStateCanged(wrapper);
+        }
+
+        private async Task HandlePlaybackStateCanged(WebViewWrapperBase wrapper)
+        {
             PlayerState state = await wrapper.GetPlayerState();
             switch (state)
             {
@@ -61,20 +73,6 @@ namespace UltraMusic.Portable.ViewModels
             PlayerState = state;
         }
 
-        private async void Wrapper_PlayerStateChanged(object sender, EventArgs e)
-        {
-            WebViewWrapperBase wrapper = (WebViewWrapperBase)sender;
-            PlayerState state = await wrapper.GetPlayerState();
-            switch (state)
-            {
-                case PlayerState.Playing:
-                    await Pause();
-                    nowPlayingViewWrapper = wrapper;
-                    break;
-            }
-            PlayerState = state;
-        }
-
 
         private PlayerState playerState = PlayerState.Idle;
         public PlayerState PlayerState
@@ -82,6 +80,9 @@ namespace UltraMusic.Portable.ViewModels
             get { return playerState; }
             set => Set(ref playerState, value);
         }
+
+        #region Music Providers
+
 
         private List<MusicProvider> musicProviders;
         public List<MusicProvider> MusicProviders
@@ -119,6 +120,8 @@ namespace UltraMusic.Portable.ViewModels
         }
 
         public abstract string GetProvidersSpecDirectory();
+
+        #endregion
 
         public override void Loaded()
         {
