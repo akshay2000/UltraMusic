@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -70,6 +71,13 @@ namespace UltraMusic.UWP
         private async void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             await VM.TogglePlayPause();
+        }
+
+        private void GlobalSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            VM.Search(args.QueryText);
+            if (MainNavigationView.SelectedItem == null)
+                MainNavigationView.SelectedItem = MainNavigationView.MenuItems[0];
         }
     }
 }

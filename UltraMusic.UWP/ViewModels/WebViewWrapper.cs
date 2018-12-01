@@ -56,8 +56,7 @@ namespace UltraMusic.UWP.ViewModels
 
         private async Task AddObservers()
         {
-            await CastedWebView.InvokeScriptAsync("eval", new string[] { musicProvider.FunctionsJs });
-            await CastedWebView.InvokeScriptAsync("eval", new string[] { "addObservers();" });
+            await CastedWebView.InvokeScriptAsync("eval", new string[] { musicProvider.FunctionsJs + "\naddObservers();" });
         }
 
         private void CastedWebView_ScriptNotify(object sender, NotifyEventArgs e)
@@ -73,6 +72,11 @@ namespace UltraMusic.UWP.ViewModels
         public override async Task<object> EvaluateJavaScript(string script)
         {
             return await CastedWebView.InvokeScriptAsync("eval", new string[] { script });
+        }
+
+        public override void Navigate(string url)
+        {
+            CastedWebView.Navigate(new Uri(url));
         }
     }
 }

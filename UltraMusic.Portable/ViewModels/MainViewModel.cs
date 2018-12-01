@@ -19,6 +19,8 @@ namespace UltraMusic.Portable.ViewModels
 
         private WebViewWrapperBase nowPlayingViewWrapper;
 
+        #region Playback Controls
+
         public async Task TogglePlayPause()
         {
             if (PlayerState == PlayerState.Paused)
@@ -29,15 +31,34 @@ namespace UltraMusic.Portable.ViewModels
 
         public async Task Pause()
         {
-            if (nowPlayingViewWrapper != null)
-            {
-                await nowPlayingViewWrapper.Pause();
-            }
+            if (nowPlayingViewWrapper != null) await nowPlayingViewWrapper.Pause();
         }
 
-        public async Task Play() => await nowPlayingViewWrapper?.Play();
-        public async Task Next() => await nowPlayingViewWrapper?.Next();
-        public async Task Previous() => await nowPlayingViewWrapper?.Previous();
+        public async Task Play()
+        {
+            if (nowPlayingViewWrapper != null) await nowPlayingViewWrapper.Play();
+        }
+
+        public async Task Next()
+        {
+            if (nowPlayingViewWrapper != null) await nowPlayingViewWrapper.Next();
+        }
+
+        public async Task Previous()
+        {
+            if (nowPlayingViewWrapper != null) await nowPlayingViewWrapper.Previous();
+        }
+
+        #endregion
+
+        public void Search(string query)
+        {
+            foreach (var provider in MusicProviders)
+            {
+                WebViewWrapperBase wrapper = GetWebViewWrapper(provider);
+                wrapper.Search(query);
+            }
+        }
 
         private Dictionary<string, WebViewWrapperBase> webViewWrappers;
 

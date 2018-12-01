@@ -23,6 +23,9 @@
             x:Name="MainNavigationView" 
             SelectionChanged="MainNavigationView_SelectionChanged"
             Windows10version1803:IsBackButtonVisible="Collapsed">
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox x:Name="GlobalSearchBox" QueryIcon="Find" QuerySubmitted="GlobalSearchBox_QuerySubmitted"/>
+            </NavigationView.AutoSuggestBox>
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="Play" />
             </NavigationView.MenuItems>

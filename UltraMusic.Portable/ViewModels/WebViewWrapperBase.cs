@@ -26,6 +26,8 @@ namespace UltraMusic.Portable.ViewModels
 
         public abstract Task<object> EvaluateJavaScript(string script);
 
+        public abstract void Navigate(string url);
+
         private async Task<object> SafeEvaluateJavaScript(string script)
         {
             try
@@ -38,6 +40,13 @@ namespace UltraMusic.Portable.ViewModels
                 return false;
             }
         }
+
+        public void Search(string query)
+        {
+            Navigate(string.Format(musicProvider.SearchUrl, query));
+        }
+
+        #region Playback Control
 
         public virtual async Task<object> Play()
         {
@@ -58,6 +67,8 @@ namespace UltraMusic.Portable.ViewModels
         {
             return await SafeEvaluateJavaScript("previous();");
         }
+
+        #endregion
 
         public virtual async Task<PlayerState> GetPlayerState()
         {
