@@ -1,1 +1,0 @@
-﻿document.getElementsByClassName("playbackControls")[0].children[2].click()

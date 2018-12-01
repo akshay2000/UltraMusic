@@ -133,28 +133,13 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\ProvidersSpec\AmazonPrime\Functions.js" />
+    <Content Include="Assets\ProvidersSpec\GoogleMusic\Functions.js" />
+    <Content Include="Assets\ProvidersSpec\Saavn\Functions.js" />
     <Content Include="Assets\ProvidersSpec\Spec.json" />
     <None Include="UltraMusic.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\ProvidersSpec\AmazonPrime\Events.js" />
-    <Content Include="Assets\ProvidersSpec\AmazonPrime\Next.js" />
-    <Content Include="Assets\ProvidersSpec\AmazonPrime\Pause.js" />
-    <Content Include="Assets\ProvidersSpec\AmazonPrime\Play.js" />
-    <Content Include="Assets\ProvidersSpec\AmazonPrime\PlayerState.js" />
-    <Content Include="Assets\ProvidersSpec\AmazonPrime\Previous.js" />
-    <Content Include="Assets\ProvidersSpec\GoogleMusic\Events.js" />
-    <Content Include="Assets\ProvidersSpec\GoogleMusic\Next.js" />
-    <Content Include="Assets\ProvidersSpec\GoogleMusic\Pause.js" />
-    <Content Include="Assets\ProvidersSpec\GoogleMusic\Play.js" />
-    <Content Include="Assets\ProvidersSpec\GoogleMusic\PlayerState.js" />
-    <Content Include="Assets\ProvidersSpec\GoogleMusic\Previous.js" />
-    <Content Include="Assets\ProvidersSpec\Saavn\Events.js" />
-    <Content Include="Assets\ProvidersSpec\Saavn\Next.js" />
-    <Content Include="Assets\ProvidersSpec\Saavn\Pause.js" />
-    <Content Include="Assets\ProvidersSpec\Saavn\Play.js" />
-    <Content Include="Assets\ProvidersSpec\Saavn\PlayerState.js" />
-    <Content Include="Assets\ProvidersSpec\Saavn\Previous.js" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

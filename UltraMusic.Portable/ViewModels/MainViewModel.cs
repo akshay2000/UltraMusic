@@ -127,12 +127,7 @@ namespace UltraMusic.Portable.ViewModels
             foreach (var provider in providers)
             {
                 string id = provider.Id;
-                provider.PlayJs = await GetText(specDirectory, id, "Play.js");
-                provider.PauseJs = await GetText(specDirectory, id, "Pause.js");
-                provider.NextJs = await GetText(specDirectory, id, "Next.js");
-                provider.PreviousJs = await GetText(specDirectory, id, "Previous.js");
-                provider.PlayerStateJs = await GetText(specDirectory, id, "PlayerState.js");
-                provider.EventsJs = await GetText(specDirectory, id, "Events.js");
+                provider.FunctionsJs = await GetText(specDirectory, id, "Functions.js");               
             }
             return providers;
         }

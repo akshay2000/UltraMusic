@@ -41,27 +41,27 @@ namespace UltraMusic.Portable.ViewModels
 
         public virtual async Task<object> Play()
         {
-            return await SafeEvaluateJavaScript(musicProvider.PlayJs);
+            return await SafeEvaluateJavaScript("play();");
         }
 
         public virtual async Task<object> Pause()
         {
-            return await SafeEvaluateJavaScript(musicProvider.PauseJs);
+            return await SafeEvaluateJavaScript("pause();");
         }
 
         public virtual async Task<object> Next()
         {
-            return await SafeEvaluateJavaScript(musicProvider.NextJs);
+            return await SafeEvaluateJavaScript("next();");
         }
 
         public virtual async Task<object> Previous()
         {
-            return await SafeEvaluateJavaScript(musicProvider.PreviousJs);
+            return await SafeEvaluateJavaScript("previous();");
         }
 
         public virtual async Task<PlayerState> GetPlayerState()
         {
-            var result = await SafeEvaluateJavaScript(musicProvider.PlayerStateJs);
+            var result = await SafeEvaluateJavaScript("getPlayerState();");
             string stateString = result.ToString();
             Enum.TryParse(stateString, true, out PlayerState state);
             return state;

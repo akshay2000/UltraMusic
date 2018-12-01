@@ -18,14 +18,21 @@ namespace UltraMusic.UWP.ViewModels
 
         public WebViewWrapper(object webView, MusicProvider musicProvider) : base(webView, musicProvider)
         {
-            CastedWebView.ScriptNotify += CastedWebView_ScriptNotify;
-            CastedWebView.NavigationCompleted += CastedWebView_NavigationCompleted;
+            InitWebView();
+
             if (musicProvider.Id != "AmazonPrime") return;
 
             timer = new DispatcherTimer();
             timer.Tick += Timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
+        }
+
+        private async Task InitWebView()
+        {
+            CastedWebView.ScriptNotify += CastedWebView_ScriptNotify;
+            CastedWebView.NavigationCompleted += CastedWebView_NavigationCompleted;
+            await CastedWebView.InvokeScriptAsync("eval", new string[] { musicProvider.FunctionsJs });
         }
 
         private async void Timer_Tick(object sender, object e)
@@ -38,15 +45,19 @@ namespace UltraMusic.UWP.ViewModels
             }
             else
             {
-                await CastedWebView.InvokeScriptAsync("eval", new string[] { musicProvider.EventsJs });
-                await CastedWebView.InvokeScriptAsync("eval", new string[] { "addObservers();" });
+                await AddObservers();
             }
         }
 
         private async void CastedWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
-            await sender.InvokeScriptAsync("eval", new string[] { musicProvider.EventsJs });
-            await sender.InvokeScriptAsync("eval", new string[] { "addObservers();" });
+            await AddObservers();
+        }
+
+        private async Task AddObservers()
+        {
+            await CastedWebView.InvokeScriptAsync("eval", new string[] { musicProvider.FunctionsJs });
+            await CastedWebView.InvokeScriptAsync("eval", new string[] { "addObservers();" });
         }
 
         private void CastedWebView_ScriptNotify(object sender, NotifyEventArgs e)
