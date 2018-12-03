@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using UltraMusic.Portable.Models;
@@ -69,6 +70,27 @@ namespace UltraMusic.Portable.ViewModels
         }
 
         #endregion
+
+        public async Task<NowPlaying> GetNowPlaying()
+        {
+            string nowPlayingJson = (await SafeEvaluateJavaScript("getNowPlaying();")).ToString();
+            try
+            {
+                NowPlaying nowPlaying = JsonConvert.DeserializeObject<NowPlaying>(nowPlayingJson);
+                return nowPlaying;
+            }
+            catch
+            {
+                return new NowPlaying();
+            }
+        }
+
+        public event EventHandler NowPlayingChanged;
+
+        protected void RaiseNowPlayingChanged()
+        {
+            NowPlayingChanged?.Invoke(this, EventArgs.Empty);
+        }
 
         public virtual async Task<PlayerState> GetPlayerState()
         {

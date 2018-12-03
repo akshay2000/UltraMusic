@@ -1,23 +1,40 @@
-﻿function observePlaybackState() {
+﻿function buildObserver(targetNode, notification) {
+    let observerConfig = { childList: true, subtree: true };
+
+    let callback = function (mutations, observer) {
+        window.external.notify(notification);
+    };
+    var observer = new MutationObserver(callback);
+    observer.observe(targetNode, observerConfig);
+}
+
+function observePlaybackState() {
     if (document.isObservingPlaybackState)
         return;
 
     var targetNode = document.getElementsByClassName("playbackControls")[0]
     if (!targetNode)
         return;
-
-    var observerConfig = { childList: true, subtree: true };
-
-    var playbackStateChanged = function (mutations, observer) {
-        window.external.notify("PlaybackStateChanged");
-    };
-    var playbackStateObserver = new MutationObserver(playbackStateChanged);
-    playbackStateObserver.observe(targetNode, observerConfig);
+    buildObserver(targetNode, "PlaybackStateChanged");
+    
     document.isObservingPlaybackState = true;
+}
+
+function observeNowPlaying() {
+    if (document.isObservingNowPlaying)
+        return;
+
+    var targetNode = document.getElementsByClassName("trackInfoContainer")[0]
+    if (!targetNode)
+        return;
+    buildObserver(targetNode, "NowPlayingChanged");
+
+    document.isObservingNowPlaying = true;
 }
 
 function addObservers() {
     observePlaybackState();
+    observeNowPlaying();
 }
 
 function getPlayerState() {
@@ -35,6 +52,8 @@ function getPlayerState() {
         }
     }
 }
+
+// region Playback Controls
 
 function previous() {
     document.getElementsByClassName("playbackControls")[0].children[0].click()
@@ -56,6 +75,22 @@ function play() {
     if (state != "playing") {
         document.getElementsByClassName('playbackControls')[0].children[1].click();
     }
+}
+
+// endregion
+
+function getNowPlaying() {
+    let albumArt = document.getElementsByClassName("playbackControlsView")[0].getElementsByClassName("renderImage")[0].src;
+    let title = document.getElementsByClassName("trackTitleWrapper")[0].getElementsByClassName("trackTitle")[0].children[0].title;
+    let artist = document.getElementsByClassName("trackInfoWrapper")[0].getElementsByClassName("trackArtist")[0].children[0].title;
+    let album = document.getElementsByClassName("trackInfoWrapper")[0].getElementsByClassName("trackSourceLink")[0].children[0].children[0].title;
+    let ret = {
+        albumArt: albumArt,
+        title: title,
+        artist: artist,
+        album: album
+    };
+    return JSON.stringify(ret);
 }
 
 areUMFunctionsAvailable = "true";

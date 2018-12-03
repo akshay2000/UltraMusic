@@ -32,6 +32,20 @@
         </NavigationView>
 
         <Grid Grid.Row="1" Background="{ThemeResource SystemAccentColor}">
+            <Grid DataContext="{Binding NowPlaying}" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Image Source="{Binding AlbumArt}" Grid.RowSpan="2" Width="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Height}"/>
+                <TextBlock Text="{Binding Title}" Grid.Column="1" Margin="12,0" VerticalAlignment="Bottom" FontSize="24" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Artist}" Grid.Column="1" Grid.Row="1" Margin="12,0"/>
+            </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" RequestedTheme="Dark">
                 <Button Style="{StaticResource ButtonRevealStyle}" Margin="4" Width="{StaticResource PlaybackButtonDimension}" Height="{StaticResource PlaybackButtonDimension}">
                     <Button.Content> 

@@ -66,6 +66,9 @@ namespace UltraMusic.UWP.ViewModels
                 case "PlaybackStateChanged":
                     RaisePlayerStateChanged();
                     break;
+                case "NowPlayingChanged":
+                    RaiseNowPlayingChanged();
+                    break;
             }
         }
 

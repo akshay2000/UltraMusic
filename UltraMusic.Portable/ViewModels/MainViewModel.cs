@@ -69,10 +69,33 @@ namespace UltraMusic.Portable.ViewModels
             {
                 WebViewWrapperBase wrapper = wrapperFactory(provider);
                 wrapper.PlayerStateChanged += Wrapper_PlayerStateChanged;
+                wrapper.NowPlayingChanged += Wrapper_NowPlayingChanged;
                 webViewWrappers[provider.Id] = wrapper;
             }
             return webViewWrappers[provider.Id];
         }
+
+        
+        #region Now Playing
+
+        private NowPlaying nowPlaying;
+        public NowPlaying NowPlaying
+        {
+            get { return nowPlaying; }
+            set => Set(ref nowPlaying, value);
+        }
+
+        private async void Wrapper_NowPlayingChanged(object sender, EventArgs e)
+        {
+            await Task.Delay(100);
+            NowPlaying = await nowPlayingViewWrapper.GetNowPlaying();
+        }
+
+        #endregion
+
+
+        #region Playback State
+
 
         public async Task PlaybackStateChanged(string providerId)
         {
@@ -110,6 +133,7 @@ namespace UltraMusic.Portable.ViewModels
                     }
                     break;
             }
+            NowPlaying = await nowPlayingViewWrapper.GetNowPlaying();
         }
 
 
@@ -119,6 +143,8 @@ namespace UltraMusic.Portable.ViewModels
             get { return playerState; }
             set => Set(ref playerState, value);
         }
+
+#endregion
 
         #region Music Providers
 
