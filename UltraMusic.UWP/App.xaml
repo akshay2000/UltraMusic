@@ -7,6 +7,7 @@
     <Application.Resources>
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
         <converters:PlaybackStateToSymbolConverter x:Key="PlayerStateToSymbolConverter"/>
+        <converters:ByLineConverter x:Key="ByLineConverter"/>
     </Application.Resources>
 
 </Application>

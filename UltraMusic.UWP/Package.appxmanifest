@@ -22,7 +22,7 @@
       </uap:VisualElements>
       <uap:ApplicationContentUriRules>
         <uap:Rule Match="https://*.amazon.in" Type="include" WindowsRuntimeAccess="all" />
-        <uap:Rule Match="https://*.saavn.com" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="https://*.jiosaavn.com" Type="include" WindowsRuntimeAccess="all" />
       </uap:ApplicationContentUriRules>
     </Application>
   </Applications>

@@ -56,4 +56,18 @@ function play() {
     }
 }
 
+function getNowPlaying() {
+    let albumArt = document.getElementById("now-playing").getElementsByClassName("key-art")[0].style["background-image"].slice(5, -2);
+    let title = document.getElementById("player-track-name").children[0].childNodes[0].data;
+    let artist = "";
+    let album = document.getElementById("player-album-name").children[0].childNodes[0].data;
+    let ret = {
+        albumArt: albumArt,
+        title: title,
+        artist: artist,
+        album: album
+    };
+    return JSON.stringify(ret);
+}
+
 areUMFunctionsAvailable = "true";

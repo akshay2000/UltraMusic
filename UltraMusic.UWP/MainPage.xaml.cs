@@ -60,6 +60,7 @@ namespace UltraMusic.UWP
 
         private void MainNavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
+            sender.IsPaneOpen = false;
             if (args.IsSettingsSelected)
                 return;
 
@@ -78,6 +79,11 @@ namespace UltraMusic.UWP
             VM.Search(args.QueryText);
             if (MainNavigationView.SelectedItem == null)
                 MainNavigationView.SelectedItem = MainNavigationView.MenuItems[0];
+        }
+
+        private void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainNavigationView.IsPaneOpen = false;
         }
     }
 }
