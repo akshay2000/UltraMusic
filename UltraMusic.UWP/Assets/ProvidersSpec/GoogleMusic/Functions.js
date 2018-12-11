@@ -2,7 +2,7 @@
     if (document.isObservingPlaybackState)
         return;
 
-    var targetNode = document.getElementsByClassName("material-player-middle")[0];
+    var targetNode = document.getElementsByClassName("material-player-middle")[0]
     console.log(targetNode);
     if (!targetNode)
         return;

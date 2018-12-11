@@ -133,7 +133,10 @@ namespace UltraMusic.Portable.ViewModels
                     }
                     break;
             }
-            NowPlaying = await nowPlayingViewWrapper.GetNowPlaying();
+            if (nowPlayingViewWrapper != null)
+            {
+                NowPlaying = await nowPlayingViewWrapper.GetNowPlaying();
+            }
         }
 
 
