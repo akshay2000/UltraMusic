@@ -19,8 +19,8 @@ namespace UltraMusic.UWP.ViewModels
         public WebViewWrapper(object webView, MusicProvider musicProvider) : base(webView, musicProvider)
         {
             InitWebView();
-
-            if (musicProvider.Id != "AmazonPrime") return;
+        
+            if (musicProvider.Id == "Saavn") return;
 
             timer = new DispatcherTimer();
             timer.Tick += Timer_Tick;

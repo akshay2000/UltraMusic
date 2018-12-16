@@ -15,14 +15,13 @@
     "Url": "https://music.amazon.in",
     "SearchUrl": "https://music.amazon.in/search/{0}"
   },
-  //{
-  //  "Id": "GoogleMusic",
-  //  "Name": "Google Music",
-  //  "Url": "https://music.google.com",
-  //  "PauseJs": "",
-  //  "PlayJs": "",
-  //  "PreviousJs": "",
-  //  "NextJs": "",
-  //  "SearchUrl": "https://play.google.com/music/listen?u=0#/sr/{0}"
-  //}
+  {  "Id": "GoogleMusic",
+    "Name": "Google Music",
+    "Url": "https://music.google.com",
+    "PauseJs": "",
+    "PlayJs": "",
+    "PreviousJs": "",
+    "NextJs": "",
+    "SearchUrl": "https://play.google.com/music/listen?u=0#/sr/{0}"
+  }
 ]
