@@ -3,10 +3,6 @@
     "Id": "Saavn",
     "Name": "Saavn",
     "Url": "https://saavn.com",
-    "PauseJs": "",
-    "PlayJs": "",
-    "PreviousJs": "",
-    "NextJs": "",
     "SearchUrl": "https://saavn.com/search/{0}"
   },
   {
@@ -19,10 +15,6 @@
     "Id": "GoogleMusic",
     "Name": "Google Music",
     "Url": "https://music.google.com",
-    "PauseJs": "",
-    "PlayJs": "",
-    "PreviousJs": "",
-    "NextJs": "",
     "SearchUrl": "https://play.google.com/music/listen?u=0#/sr/{0}"
   }
 ]

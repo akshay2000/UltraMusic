@@ -69,4 +69,14 @@ function getNowPlaying() {
     return JSON.stringify(ret);
 }
 
+function search(query) {
+    s = document.getElementsByTagName("sj-search-box")[0];
+    i = document.getElementById("input");
+    i.value = query;
+    e = document.createEvent("Event");
+    e.initEvent("keydown");
+    e.which = e.keyCode = 13;
+    s.dispatchEvent(e);
+}
+
 areUMFunctionsAvailable = "true";
