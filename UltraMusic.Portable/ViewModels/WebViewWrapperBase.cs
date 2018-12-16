@@ -42,8 +42,10 @@ namespace UltraMusic.Portable.ViewModels
             }
         }
 
-        public void Search(string query)
+        public async Task Search(string query)
         {
+            var result = await SafeEvaluateJavaScript($"search(\"{query}\");");
+            if (result.ToString() == "true") return;
             Navigate(string.Format(musicProvider.SearchUrl, query));
         }
 

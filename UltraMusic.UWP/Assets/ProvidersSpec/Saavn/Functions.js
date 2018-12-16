@@ -33,7 +33,6 @@ function addObservers() {
     observePlaybackState();
 }
 
-
 function previous() {
     document.getElementById("rew").click();
 }
@@ -68,6 +67,15 @@ function getNowPlaying() {
         album: album
     };
     return JSON.stringify(ret);
+}
+
+function search(query) {
+    s = $("#search").length > 0 ? $("#search") : $("#q");
+    s.val(query);
+    e = jQuery.Event("keypress");
+    e.which = "13";
+    s.trigger(e);
+    return "true";
 }
 
 areUMFunctionsAvailable = "true";
