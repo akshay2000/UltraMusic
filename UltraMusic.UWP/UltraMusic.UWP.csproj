@@ -135,8 +135,11 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="Assets\ProvidersSpec\AmazonPrime\Functions.js" />
+    <Content Include="Assets\ProvidersSpec\AmazonPrime\Icon.png" />
     <Content Include="Assets\ProvidersSpec\GoogleMusic\Functions.js" />
+    <Content Include="Assets\ProvidersSpec\GoogleMusic\Icon.png" />
     <Content Include="Assets\ProvidersSpec\Saavn\Functions.js" />
+    <Content Include="Assets\ProvidersSpec\Saavn\Icon.png" />
     <Content Include="Assets\ProvidersSpec\Spec.json" />
     <None Include="UltraMusic.UWP_TemporaryKey.pfx" />
   </ItemGroup>
@@ -171,6 +174,7 @@
       <Name>UltraMusic.Portable</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

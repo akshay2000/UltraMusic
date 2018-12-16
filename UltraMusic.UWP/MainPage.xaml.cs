@@ -51,7 +51,7 @@ namespace UltraMusic.UWP
             {
                 MainNavigationView.MenuItems.Add(new NavigationViewItem()
                 {
-                    Icon = new SymbolIcon(Symbol.Play),
+                    Icon = new BitmapIcon() { UriSource = new Uri($"ms-appx:///Assets/ProvidersSpec/{p.Id}/Icon.png") },
                     Content = p.Name,
                     Tag = p.Id
                 });

@@ -15,7 +15,8 @@
     "Url": "https://music.amazon.in",
     "SearchUrl": "https://music.amazon.in/search/{0}"
   },
-  {  "Id": "GoogleMusic",
+  {
+    "Id": "GoogleMusic",
     "Name": "Google Music",
     "Url": "https://music.google.com",
     "PauseJs": "",
