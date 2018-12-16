@@ -93,4 +93,11 @@ function getNowPlaying() {
     return JSON.stringify(ret);
 }
 
+function search(query) {
+    s = document.getElementById("searchMusic");
+    s.value = query;
+    document.getElementById("dragonflyTransport").getElementsByClassName("playerIconSearch")[0].click();
+    return "true";
+}
+
 areUMFunctionsAvailable = "true";
