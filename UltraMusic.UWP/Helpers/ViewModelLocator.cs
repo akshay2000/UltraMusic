@@ -18,5 +18,15 @@ namespace UltraMusic.UWP.Helpers
                 return mainViewModel;
             }
         }
+
+        private static MediaTransportHelper mediaTransportHelper;
+        public static MediaTransportHelper MediaTransportHelper
+        {
+            get
+            {
+                mediaTransportHelper = mediaTransportHelper ?? new MediaTransportHelper(MainViewModel);
+                return mediaTransportHelper;
+            }
+        }
     }
 }

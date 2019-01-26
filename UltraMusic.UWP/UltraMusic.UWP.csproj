@@ -122,6 +122,7 @@
     <Compile Include="Converters\ByLineConverter.cs" />
     <Compile Include="Converters\PlaybackStateToSymbolConverter.cs" />
     <Compile Include="Converters\StringToBoolConverter.cs" />
+    <Compile Include="Helpers\MediaTransportHelper.cs" />
     <Compile Include="Helpers\ViewModelLocator.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

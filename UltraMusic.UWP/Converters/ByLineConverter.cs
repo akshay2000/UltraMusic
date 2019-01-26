@@ -16,7 +16,7 @@ namespace UltraMusic.UWP.Converters
             {
                 int remainingArtists = artists.Length - maxArtists;
                 string otherString = remainingArtists == 1 ? "other" : "others";
-                artist = $"{artists[0]}, {artists[1]} and {remainingArtists} {otherString}";
+                artist = $"{artists[0].Trim()}, {artists[1].Trim()} and {remainingArtists} {otherString}";
             }
             else
             {

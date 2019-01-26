@@ -83,6 +83,8 @@ namespace UltraMusic.UWP
 
         private void MainNavigationView_Loaded(object sender, RoutedEventArgs e)
         {
+            var transportHelper = ViewModelLocator.MediaTransportHelper;
+ 
             MainNavigationView.IsPaneOpen = false;
         }
     }
